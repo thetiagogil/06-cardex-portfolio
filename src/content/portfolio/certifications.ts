@@ -1,0 +1,40 @@
+import type { CertificationItem } from "@/content/portfolio/types";
+
+export const certifications: CertificationItem[] = [
+  {
+    id: "cert-react-native",
+    category: "certifications",
+    title: "React Native",
+    org: "Udemy",
+    descriptionKey: "certification_react_native_description",
+    link: "https://www.udemy.com/course/build-mobile-apps-with-react-native-from-to-zero-to-expert",
+    techs: ["React Native", "JavaScript", "REST API", "Postman"],
+    dateStart: new Date("2024-01-05"),
+    featured: false,
+    hasDetailsPage: false,
+  },
+  {
+    id: "cert-agile",
+    category: "certifications",
+    title: "Agile Project Management",
+    org: "Udemy",
+    descriptionKey: "certification_agile_description",
+    link: "https://www.udemy.com/course/agile-project-management-certification",
+    techs: ["Agile Methodologies", "Lean Principles", "Kanban", "Jira"],
+    dateStart: new Date("2024-02-01"),
+    featured: false,
+    hasDetailsPage: false,
+  },
+  {
+    id: "cert-outsystems",
+    category: "certifications",
+    title: "OutSystems",
+    org: "Udemy",
+    descriptionKey: "certification_outsystems_description",
+    link: "https://www.udemy.com/course/complete-course-on-outsystems-development",
+    techs: ["OutSystems"],
+    dateStart: new Date("2024-02-05"),
+    featured: false,
+    hasDetailsPage: false,
+  },
+];

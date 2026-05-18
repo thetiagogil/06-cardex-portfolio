@@ -1,19 +1,10 @@
-import { App } from "@/app";
-import "@/main.css";
-import { I18nProvider } from "@/providers/I18nProvider";
-import { ThemeProvider } from "@/providers/ThemeProvider";
+import { App } from "@/app/App";
+import "@/styles/main.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
-      <ThemeProvider>
-        <I18nProvider>
-          <App />
-        </I18nProvider>
-      </ThemeProvider>
-    </BrowserRouter>
+    <App />
   </StrictMode>,
 );
