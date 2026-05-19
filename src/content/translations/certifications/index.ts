@@ -8,4 +8,3 @@ export const certificationTranslations: TranslationDictionary = {
   ...agileTranslations,
   ...outsystemsTranslations,
 };
-

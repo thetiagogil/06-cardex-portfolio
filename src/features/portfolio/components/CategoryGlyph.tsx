@@ -15,14 +15,14 @@ export const CategoryGlyph = ({
   return (
     <span
       className={cn(
-        "relative inline-grid shrink-0 place-items-center overflow-hidden bg-background",
+        "bg-background relative inline-grid shrink-0 place-items-center overflow-hidden",
         meta.colorClassName,
         className,
       )}
       aria-hidden
     >
       <Icon
-        className="absolute inset-0 m-auto size-4 sm:size-full fill-current"
+        className="absolute inset-0 m-auto size-4 fill-current sm:size-full"
         strokeWidth={1.6}
       />
     </span>

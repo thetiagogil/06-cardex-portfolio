@@ -1,14 +1,20 @@
 import { CategoryGlyph } from "@/features/portfolio/components/CategoryGlyph";
 import { MetaPill } from "@/features/portfolio/components/MetaPill";
 import { TechBadge } from "@/features/portfolio/components/TechBadge";
-import { getItemOrg, getItemTitle } from "@/features/portfolio/lib/portfolio-display";
+import {
+  getItemOrg,
+  getItemTitle,
+} from "@/features/portfolio/lib/portfolio-display";
 import {
   formatMonthYearRange,
   formatProjectOriginDate,
   getTimelineDateParts,
   getYearDateParts,
 } from "@/features/portfolio/lib/portfolio-dates";
-import { getItemHref, isProjectItem } from "@/features/portfolio/lib/portfolio-routing";
+import {
+  getItemHref,
+  isProjectItem,
+} from "@/features/portfolio/lib/portfolio-routing";
 import { shouldShowProjectStatus } from "@/features/portfolio/lib/portfolio-display";
 import { useI18n } from "@/shared/i18n/useI18n";
 import type { DataItem } from "@/features/portfolio/types";
@@ -60,19 +66,19 @@ export const TimelineItem = ({ item }: { item: DataItem }) => {
   const inner = (
     <div className="relative grid grid-cols-[52px_1fr] gap-3 py-6 md:grid-cols-[152px_1fr] md:gap-8">
       <div className="text-right" aria-label={fullDateRange}>
-        <div className="font-mono text-[10px] leading-tight text-foreground md:hidden">
+        <div className="text-foreground font-mono text-[10px] leading-tight md:hidden">
           {projectDate ?? mobileDate?.primary}
         </div>
         {mobileDate?.secondary && (
-          <div className="mt-1 font-mono text-[9px] leading-tight text-muted-foreground md:hidden">
+          <div className="text-muted-foreground mt-1 font-mono text-[9px] leading-tight md:hidden">
             {mobileDate.secondary}
           </div>
         )}
-        <div className="hidden font-mono text-xs leading-tight text-foreground md:block">
+        <div className="text-foreground hidden font-mono text-xs leading-tight md:block">
           {projectDate ?? date?.primary}
         </div>
         {date?.secondary && (
-          <div className="mt-1 hidden font-mono text-[10px] leading-tight text-muted-foreground md:block">
+          <div className="text-muted-foreground mt-1 hidden font-mono text-[10px] leading-tight md:block">
             {date.secondary}
           </div>
         )}
@@ -85,7 +91,7 @@ export const TimelineItem = ({ item }: { item: DataItem }) => {
         />
 
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-muted-foreground md:text-[10px]">
+          <span className="text-muted-foreground font-mono text-[9px] tracking-[0.2em] uppercase md:text-[10px]">
             {t(`section.${item.category}`)}
           </span>
           {isProject && <MetaPill kind="project" value={item.type} />}
@@ -94,24 +100,24 @@ export const TimelineItem = ({ item }: { item: DataItem }) => {
           )}
         </div>
 
-        <h2 className="mt-1.5 font-display text-lg tracking-tight text-balance md:text-2xl transition-colors duration-300 group-hover:text-primary">
+        <h2 className="font-display group-hover:text-primary mt-1.5 text-lg tracking-tight text-balance transition-colors duration-300 md:text-2xl">
           {getItemTitle(item, tr)}
           {LinkIndicator && (
             <LinkIndicator
-              className="ml-2 inline-block h-4 w-4 text-muted-foreground transition-colors duration-300 group-hover:text-primary"
+              className="text-muted-foreground group-hover:text-primary ml-2 inline-block h-4 w-4 transition-colors duration-300"
               strokeWidth={1.8}
             />
           )}
         </h2>
 
         {org && (
-          <p className="mt-0.5 text-xs italic text-muted-foreground md:text-sm">
+          <p className="text-muted-foreground mt-0.5 text-xs italic md:text-sm">
             {org}
           </p>
         )}
 
         {item.descriptionKey && (
-          <p className="mt-3 max-w-2xl text-xs leading-relaxed text-muted-foreground text-pretty md:text-base">
+          <p className="text-muted-foreground mt-3 max-w-2xl text-xs leading-relaxed text-pretty md:text-base">
             {tr(item.descriptionKey)}
           </p>
         )}

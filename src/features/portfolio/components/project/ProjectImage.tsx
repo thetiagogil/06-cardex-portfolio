@@ -76,12 +76,12 @@ export const ProjectImage = ({
 
     return (
       <>
-        <figure className="overflow-hidden rounded-sm border border-border bg-muted/40">
+        <figure className="border-border bg-muted/40 overflow-hidden rounded-sm border">
           <button
             type="button"
             aria-label="Open image viewer"
             onClick={() => openLightbox(0)}
-            className="group relative block w-full cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="group focus-visible:ring-ring relative block w-full cursor-zoom-in focus-visible:ring-2 focus-visible:outline-none"
           >
             <LoadableImage
               key={image}
@@ -91,7 +91,7 @@ export const ProjectImage = ({
               loading="eager"
               onError={() => handleImageError(image)}
             />
-            <span className="absolute top-3 left-3 flex h-8 w-8 items-center justify-center rounded-full bg-background/85 text-foreground opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+            <span className="bg-background/85 text-foreground absolute top-3 left-3 flex h-8 w-8 items-center justify-center rounded-full opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
               <Maximize2 className="h-4 w-4" strokeWidth={1.8} />
             </span>
           </button>
@@ -111,9 +111,9 @@ export const ProjectImage = ({
 
   return (
     <>
-      <figure className="overflow-hidden rounded-sm border border-border bg-muted/40">
+      <figure className="border-border bg-muted/40 overflow-hidden rounded-sm border">
         <Carousel setApi={setApi} className="w-full">
-          <div className="absolute right-3 top-3 z-10 rounded-full bg-background/85 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground backdrop-blur-sm">
+          <div className="bg-background/85 text-foreground absolute top-3 right-3 z-10 rounded-full px-2.5 py-1 font-mono text-[10px] tracking-[0.18em] uppercase backdrop-blur-sm">
             {selectedIndex + 1} / {visibleImages.length}
           </div>
 
@@ -124,7 +124,7 @@ export const ProjectImage = ({
                   type="button"
                   aria-label={`Open image ${index + 1} of ${visibleImages.length}`}
                   onClick={() => openLightbox(index)}
-                  className="group relative block w-full cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="group focus-visible:ring-ring relative block w-full cursor-zoom-in focus-visible:ring-2 focus-visible:outline-none"
                 >
                   <LoadableImage
                     key={image}
@@ -134,7 +134,7 @@ export const ProjectImage = ({
                     loading={index === 0 ? "eager" : "lazy"}
                     onError={() => handleImageError(image)}
                   />
-                  <span className="absolute top-3 left-3 flex h-8 w-8 items-center justify-center rounded-full bg-background/85 text-foreground opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                  <span className="bg-background/85 text-foreground absolute top-3 left-3 flex h-8 w-8 items-center justify-center rounded-full opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
                     <Maximize2 className="h-4 w-4" strokeWidth={1.8} />
                   </span>
                 </button>
@@ -142,8 +142,8 @@ export const ProjectImage = ({
             ))}
           </CarouselContent>
 
-          <CarouselPrevious className="left-3 top-auto bottom-3 translate-y-0 bg-background/85 backdrop-blur-sm hover:bg-background" />
-          <CarouselNext className="right-3 top-auto bottom-3 translate-y-0 bg-background/85 backdrop-blur-sm hover:bg-background" />
+          <CarouselPrevious className="bg-background/85 hover:bg-background top-auto bottom-3 left-3 translate-y-0 backdrop-blur-sm" />
+          <CarouselNext className="bg-background/85 hover:bg-background top-auto right-3 bottom-3 translate-y-0 backdrop-blur-sm" />
         </Carousel>
       </figure>
 

@@ -59,9 +59,7 @@ export const formatMonthYearRange = ({
 
   const endLabel = formatMonthYear(dateEnd, lang, monthStyle);
 
-  return startLabel === endLabel
-    ? startLabel
-    : `${startLabel} - ${endLabel}`;
+  return startLabel === endLabel ? startLabel : `${startLabel} - ${endLabel}`;
 };
 
 export const getYearDateParts = ({

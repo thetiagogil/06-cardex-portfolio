@@ -46,8 +46,10 @@ export interface ExperienceItem extends BaseDataItem {
   roleKey?: string;
 }
 
-export interface ProjectItem
-  extends Omit<BaseDataItem, "hasDetailsPage" | "img" | "status"> {
+export interface ProjectItem extends Omit<
+  BaseDataItem,
+  "hasDetailsPage" | "img" | "status"
+> {
   category: "projects";
   repo?: string;
   status: ItemStatus;

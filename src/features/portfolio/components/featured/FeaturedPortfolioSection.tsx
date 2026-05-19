@@ -1,5 +1,8 @@
 import { CategoryGlyph } from "@/features/portfolio/components/CategoryGlyph";
-import { allItems, getSorted } from "@/features/portfolio/lib/portfolio-queries";
+import {
+  allItems,
+  getSorted,
+} from "@/features/portfolio/lib/portfolio-queries";
 import { isVisibleItem } from "@/features/portfolio/lib/portfolio-visibility";
 import { useI18n } from "@/shared/i18n/useI18n";
 import type { Category } from "@/features/portfolio/types";
@@ -28,13 +31,13 @@ export const FeaturedPortfolioSection = ({
         <h2 className="font-display text-lg md:text-2xl">
           {t(`section.${category}`)}
         </h2>
-        <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+        <div className="text-muted-foreground flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] uppercase">
           <CategoryGlyph category={category} className="h-5 w-5" />
           <span>{String(items.length).padStart(2, "0")} / featured</span>
         </div>
       </div>
 
-      <ul className="divide-y divide-border/70 border-y border-border/70">
+      <ul className="divide-border/70 border-border/70 divide-y border-y">
         {items.map((item) => (
           <FeaturedPortfolioItem key={item.id} item={item} />
         ))}

@@ -28,27 +28,27 @@ export const SettingsButton = () => {
           type="button"
           aria-label="Close settings"
           onClick={() => setOpen(false)}
-          className="fixed inset-0 z-40 bg-foreground/10"
+          className="bg-foreground/10 fixed inset-0 z-40"
         />
       )}
 
       {open && (
         <div
-          className="absolute bottom-full right-0 z-50 mb-3 w-72 rounded-md border border-border bg-card text-card-foreground shadow-2xl"
+          className="border-border bg-card text-card-foreground absolute right-0 bottom-full z-50 mb-3 w-72 rounded-md border shadow-2xl"
           role="dialog"
           aria-modal="true"
         >
-          <div className="border-b border-border px-5 py-4">
-            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
+          <div className="border-border border-b px-5 py-4">
+            <p className="text-muted-foreground font-mono text-[10px] tracking-[0.25em] uppercase">
               {t("settings.title")}
             </p>
           </div>
           <div className="space-y-5 p-5">
             <div>
-              <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+              <p className="text-muted-foreground mb-2 font-mono text-[10px] tracking-[0.2em] uppercase">
                 {t("settings.language")}
               </p>
-              <div className="grid grid-cols-2 gap-1 rounded-sm bg-muted p-1">
+              <div className="bg-muted grid grid-cols-2 gap-1 rounded-sm p-1">
                 {langs.map((entry) => (
                   <button
                     key={entry.value}
@@ -67,10 +67,10 @@ export const SettingsButton = () => {
             </div>
 
             <div>
-              <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+              <p className="text-muted-foreground mb-2 font-mono text-[10px] tracking-[0.2em] uppercase">
                 {t("settings.theme")}
               </p>
-              <div className="grid grid-cols-3 gap-1 rounded-sm bg-muted p-1">
+              <div className="bg-muted grid grid-cols-3 gap-1 rounded-sm p-1">
                 {modes.map((entry) => (
                   <button
                     key={entry.value}
@@ -96,7 +96,7 @@ export const SettingsButton = () => {
         onClick={() => setOpen((current) => !current)}
         aria-label={t("settings.open")}
         aria-expanded={open}
-        className="relative z-50 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-foreground text-background shadow-xl transition-colors duration-300 hover:bg-primary"
+        className="bg-foreground text-background hover:bg-primary relative z-50 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full shadow-xl transition-colors duration-300"
       >
         <Settings
           size={18}

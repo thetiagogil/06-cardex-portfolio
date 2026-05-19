@@ -6,11 +6,11 @@ export const SiteHeader = () => {
   const location = useLocation();
 
   return (
-    <header className="border-b border-border/60">
-      <div className="max-w-350 mx-auto px-6 md:px-12 py-5 flex items-center justify-between">
+    <header className="border-border/60 border-b">
+      <div className="mx-auto flex max-w-350 items-center justify-between px-6 py-5 md:px-12">
         <Link to="/" className="group flex items-center gap-3">
           <span className="font-display text-xl tracking-tight">Tiago Gil</span>
-          <span className="hidden sm:inline font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
+          <span className="text-muted-foreground hidden font-mono text-[10px] tracking-[0.25em] uppercase sm:inline">
             Portfolio
           </span>
         </Link>
@@ -18,7 +18,7 @@ export const SiteHeader = () => {
         <nav className="flex items-center gap-1">
           <Link
             to="/"
-            className={`px-3 py-1.5 text-sm font-mono tracking-wide transition-colors duration-300 ${
+            className={`px-3 py-1.5 font-mono text-sm tracking-wide transition-colors duration-300 ${
               location.pathname === "/"
                 ? "text-foreground"
                 : "text-muted-foreground hover:text-foreground"
@@ -28,7 +28,7 @@ export const SiteHeader = () => {
           </Link>
           <Link
             to="/timeline"
-            className={`px-3 py-1.5 text-sm font-mono tracking-wide transition-colors duration-300 ${
+            className={`px-3 py-1.5 font-mono text-sm tracking-wide transition-colors duration-300 ${
               location.pathname === "/timeline"
                 ? "text-foreground"
                 : "text-muted-foreground hover:text-foreground"

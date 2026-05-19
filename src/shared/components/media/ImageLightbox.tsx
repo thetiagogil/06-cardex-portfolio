@@ -131,7 +131,7 @@ export const ImageLightbox = ({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-100 bg-background/95 text-foreground backdrop-blur-md"
+      className="bg-background/95 text-foreground fixed inset-0 z-100 backdrop-blur-md"
       role="dialog"
       aria-modal="true"
       aria-label={`${alt} image viewer`}
@@ -144,7 +144,7 @@ export const ImageLightbox = ({
         <div className="flex items-center justify-between gap-4">
           <div className="min-h-6">
             {counterLabel && (
-              <p className="rounded-full bg-background/85 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground">
+              <p className="bg-background/85 text-foreground rounded-full px-2.5 py-1 font-mono text-[10px] tracking-[0.18em] uppercase">
                 {counterLabel}
               </p>
             )}
@@ -155,7 +155,7 @@ export const ImageLightbox = ({
             type="button"
             aria-label="Close image viewer"
             onClick={() => onOpenChange(false)}
-            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-border bg-background/85 text-foreground backdrop-blur-sm transition-colors duration-300 hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="border-border bg-background/85 text-foreground hover:bg-foreground hover:text-background focus-visible:ring-ring flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border backdrop-blur-sm transition-colors duration-300 focus-visible:ring-2 focus-visible:outline-none"
           >
             <X className="h-4 w-4" strokeWidth={1.8} />
           </button>
@@ -194,8 +194,8 @@ export const ImageLightbox = ({
                 ))}
               </CarouselContent>
 
-              <CarouselPrevious className="left-2 top-1/2 h-10 w-10 -translate-y-1/2 bg-background/85 backdrop-blur-sm hover:bg-background md:left-4" />
-              <CarouselNext className="right-2 top-1/2 h-10 w-10 -translate-y-1/2 bg-background/85 backdrop-blur-sm hover:bg-background md:right-4" />
+              <CarouselPrevious className="bg-background/85 hover:bg-background top-1/2 left-2 h-10 w-10 -translate-y-1/2 backdrop-blur-sm md:left-4" />
+              <CarouselNext className="bg-background/85 hover:bg-background top-1/2 right-2 h-10 w-10 -translate-y-1/2 backdrop-blur-sm md:right-4" />
             </Carousel>
           )}
         </div>

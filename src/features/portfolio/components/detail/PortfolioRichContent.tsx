@@ -36,7 +36,7 @@ const RichTextInline = ({ content }: { content: RichText }) => (
           <Link
             key={index}
             to={internalHref}
-            className="font-semibold text-foreground underline decoration-border underline-offset-4 transition-colors duration-300 hover:text-primary"
+            className="text-foreground decoration-border hover:text-primary font-semibold underline underline-offset-4 transition-colors duration-300"
           >
             {inner}
           </Link>
@@ -59,7 +59,7 @@ const RichTextInline = ({ content }: { content: RichText }) => (
           href={part.href}
           target={isExternalHref ? "_blank" : undefined}
           rel={isExternalHref ? "noreferrer" : undefined}
-          className="font-semibold text-foreground underline decoration-border underline-offset-4 transition-colors duration-300 hover:text-primary"
+          className="text-foreground decoration-border hover:text-primary font-semibold underline underline-offset-4 transition-colors duration-300"
         >
           {inner}
         </a>
@@ -80,7 +80,7 @@ const RichList = ({
       <li
         key={`${depth}-${index}`}
         className={cn(
-          "relative pl-5 before:absolute before:left-0 before:top-[0.72em] before:h-1.5 before:w-1.5 before:rounded-full before:content-['']",
+          "relative pl-5 before:absolute before:top-[0.72em] before:left-0 before:h-1.5 before:w-1.5 before:rounded-full before:content-['']",
           depth === 0 ? "before:bg-primary" : "before:bg-border",
         )}
       >
@@ -89,7 +89,7 @@ const RichList = ({
         </p>
 
         {item.children?.length ? (
-          <div className="border-l border-border/70 pl-4">
+          <div className="border-border/70 border-l pl-4">
             <RichList items={item.children} depth={depth + 1} />
           </div>
         ) : null}
@@ -152,10 +152,10 @@ export const PortfolioRichContent = ({
         {value.sections.map((section, index) => (
           <section
             key={`${section.title ?? "section"}-${index}`}
-            className="border-t border-border/60 pt-6 first:border-t-0 first:pt-0"
+            className="border-border/60 border-t pt-6 first:border-t-0 first:pt-0"
           >
             {section.title && (
-              <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/65 md:text-[11px]">
+              <p className="text-foreground/65 mb-4 font-mono text-[10px] tracking-[0.22em] uppercase md:text-[11px]">
                 {section.title}
               </p>
             )}

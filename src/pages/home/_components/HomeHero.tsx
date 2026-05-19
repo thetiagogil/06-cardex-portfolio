@@ -13,8 +13,8 @@ export const HomeHero = () => {
   const homeBio = tv("home.bio") ?? t("home.bio");
 
   return (
-    <aside className="space-y-8 lg:col-span-5 lg:sticky lg:top-10 lg:self-start">
-      <div className="grain relative overflow-hidden rounded-sm border border-border">
+    <aside className="space-y-8 lg:sticky lg:top-10 lg:col-span-5 lg:self-start">
+      <div className="grain border-border relative overflow-hidden rounded-sm border">
         <img
           src={portrait}
           alt={person.name}
@@ -22,16 +22,16 @@ export const HomeHero = () => {
           height={960}
           className="block h-auto w-full grayscale-15"
         />
-        <div className="absolute bottom-3 left-3 font-mono text-[10px] uppercase tracking-[0.25em] text-background/90 mix-blend-difference">
+        <div className="text-background/90 absolute bottom-3 left-3 font-mono text-[10px] tracking-[0.25em] uppercase mix-blend-difference">
           MMXXV {"\u00B7"} 01
         </div>
       </div>
 
       <div>
-        <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-muted-foreground md:text-[12px]">
+        <p className="text-muted-foreground font-mono text-[11px] tracking-[0.25em] uppercase md:text-[12px]">
           {t("home.role")}
         </p>
-        <h1 className="mt-2 font-display text-3xl tracking-tight text-balance md:text-5xl">
+        <h1 className="font-display mt-2 text-3xl tracking-tight text-balance md:text-5xl">
           {person.name}
         </h1>
         <PortfolioRichContent
@@ -51,7 +51,7 @@ export const HomeHero = () => {
       <div className="flex flex-wrap gap-3 pt-2">
         <RouterLink
           to="/timeline"
-          className="inline-flex items-center gap-2 bg-foreground px-5 py-3 font-mono text-xs uppercase tracking-[0.18em] text-background transition-colors duration-300 hover:bg-primary"
+          className="bg-foreground text-background hover:bg-primary inline-flex items-center gap-2 px-5 py-3 font-mono text-xs tracking-[0.18em] uppercase transition-colors duration-300"
         >
           {t("home.viewTimeline")}
           <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.8} />

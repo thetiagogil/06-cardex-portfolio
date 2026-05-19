@@ -1,5 +1,8 @@
 import { Badge } from "@/shared/components/ui/Badge";
-import { timelineFilters, type TimelineFilter } from "@/features/portfolio/lib/portfolio-filters";
+import {
+  timelineFilters,
+  type TimelineFilter,
+} from "@/features/portfolio/lib/portfolio-filters";
 import { useI18n } from "@/shared/i18n/useI18n";
 import { SlidersHorizontal } from "lucide-react";
 
@@ -23,7 +26,7 @@ export const TimelineFilters = ({
             type="button"
             onClick={() => onChange(filter)}
             aria-pressed={value === filter}
-            className={`cursor-pointer px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.15em] transition-colors duration-300 ${
+            className={`cursor-pointer px-3 py-1.5 font-mono text-[11px] tracking-[0.15em] uppercase transition-colors duration-300 ${
               value === filter
                 ? "bg-foreground text-background"
                 : "text-muted-foreground hover:text-foreground"
@@ -39,13 +42,13 @@ export const TimelineFilters = ({
         type="button"
         disabled
         title={t("timeline.advancedFilters")}
-        className="inline-flex  w-full  items-center justify-between gap-2 self-start rounded-full border border-dashed border-border px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground opacity-80 md:w-auto md:justify-start"
+        className="border-border text-muted-foreground inline-flex w-full items-center justify-between gap-2 self-start rounded-full border border-dashed px-3 py-1.5 font-mono text-[10px] tracking-[0.15em] uppercase opacity-80 md:w-auto md:justify-start"
       >
         <SlidersHorizontal className="size-3.5" strokeWidth={1.8} />
         <span>{t("timeline.advancedFilters")}</span>
         <Badge
           variant="outline"
-          className="rounded-full border-border bg-background px-2 py-0 font-mono text-[9px] uppercase tracking-[0.15em] text-muted-foreground"
+          className="border-border bg-background text-muted-foreground rounded-full px-2 py-0 font-mono text-[9px] tracking-[0.15em] uppercase"
         >
           {t("common.soon")}
         </Badge>

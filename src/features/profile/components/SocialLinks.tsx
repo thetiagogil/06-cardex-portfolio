@@ -9,7 +9,7 @@ export const SocialLinks = ({ links }: { links: ProfileSocialLink[] }) => (
         href={social.href}
         target="_blank"
         rel="noreferrer"
-        className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-foreground transition-colors duration-300 hover:text-primary"
+        className="text-foreground hover:text-primary inline-flex items-center gap-1.5 font-mono text-xs tracking-[0.18em] uppercase transition-colors duration-300"
       >
         <span>{social.label}</span>
         <ExternalLink className="h-3.5 w-3.5" strokeWidth={1.8} />

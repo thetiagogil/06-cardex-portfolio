@@ -1,8 +1,5 @@
 import { MetaPill } from "@/features/portfolio/components/MetaPill";
-import type {
-  ItemStatus,
-  ProjectType,
-} from "@/features/portfolio/types";
+import type { ItemStatus, ProjectType } from "@/features/portfolio/types";
 
 export const PortfolioDetailHeader = ({
   dateLabel,
@@ -23,7 +20,7 @@ export const PortfolioDetailHeader = ({
 }) => (
   <header className="mt-8 space-y-2 md:mt-10">
     {org && (
-      <p className="font-mono text-[12px] uppercase tracking-[0.22em] text-muted-foreground md:text-[14px]">
+      <p className="text-muted-foreground font-mono text-[12px] tracking-[0.22em] uppercase md:text-[14px]">
         {org}
       </p>
     )}
@@ -34,13 +31,13 @@ export const PortfolioDetailHeader = ({
       </h1>
 
       {subject && (
-        <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground text-pretty md:text-lg">
+        <p className="text-muted-foreground max-w-3xl text-sm leading-relaxed text-pretty md:text-lg">
           {subject}
         </p>
       )}
 
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-        <span className="font-mono text-[10px] text-muted-foreground md:text-[11px]">
+        <span className="text-muted-foreground font-mono text-[10px] md:text-[11px]">
           {dateLabel}
         </span>
         {isProject && projectType && (

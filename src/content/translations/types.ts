@@ -37,9 +37,7 @@ export type TranslationBlockValue =
   | ParagraphTranslationValue
   | ListTranslationValue;
 
-export type TranslationValue =
-  | TranslationBlockValue
-  | SectionsTranslationValue;
+export type TranslationValue = TranslationBlockValue | SectionsTranslationValue;
 
 export interface TranslationEntry {
   en: TranslationValue;
@@ -47,4 +45,3 @@ export interface TranslationEntry {
 }
 
 export type TranslationDictionary = Record<string, TranslationEntry>;
-

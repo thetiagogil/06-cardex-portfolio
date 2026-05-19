@@ -1,7 +1,10 @@
 import { TimelineFilters } from "@/features/portfolio/components/timeline/TimelineFilters";
 import { TimelineItem } from "@/features/portfolio/components/timeline/TimelineItem";
 import { usePortfolioFilters } from "@/features/portfolio/hooks/usePortfolioFilters";
-import { isTimelineFilter, type TimelineFilter } from "@/features/portfolio/lib/portfolio-filters";
+import {
+  isTimelineFilter,
+  type TimelineFilter,
+} from "@/features/portfolio/lib/portfolio-filters";
 import { useI18n } from "@/shared/i18n/useI18n";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -16,7 +19,10 @@ export const TimelinePage = () => {
   const { counts, sortedItems } = usePortfolioFilters(filter);
 
   useEffect(() => {
-    if (!filterParam || (filterParam !== "all" && isTimelineFilter(filterParam))) {
+    if (
+      !filterParam ||
+      (filterParam !== "all" && isTimelineFilter(filterParam))
+    ) {
       return;
     }
 
@@ -43,18 +49,18 @@ export const TimelinePage = () => {
         <h1 className="font-display text-3xl tracking-tight md:text-5xl">
           {t("timeline.title")}
         </h1>
-        <p className="mt-3 max-w-xl text-sm text-muted-foreground text-pretty md:text-lg">
+        <p className="text-muted-foreground mt-3 max-w-xl text-sm text-pretty md:text-lg">
           {t("timeline.subtitle")}
         </p>
       </header>
 
-      <div className="sticky top-0 z-20 -mx-6 mb-8 border-b border-border/60 bg-background/80 px-6 py-4 backdrop-blur-md md:-mx-12 md:px-12">
+      <div className="border-border/60 bg-background/80 sticky top-0 z-20 -mx-6 mb-8 border-b px-6 py-4 backdrop-blur-md md:-mx-12 md:px-12">
         <TimelineFilters value={filter} counts={counts} onChange={setFilter} />
       </div>
 
       <ol className="relative">
         <div
-          className="absolute bottom-2 left-20.25 top-2 w-px bg-border md:left-46.25"
+          className="bg-border absolute top-2 bottom-2 left-20.25 w-px md:left-46.25"
           aria-hidden
         />
 

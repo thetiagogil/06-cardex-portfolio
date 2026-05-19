@@ -12,4 +12,3 @@ export const dictionary: TranslationDictionary = {
   ...educationTranslations,
   ...certificationTranslations,
 };
-

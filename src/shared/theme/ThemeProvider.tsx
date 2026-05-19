@@ -1,5 +1,8 @@
 import { ThemeContext } from "@/shared/theme/theme-context";
-import { getStoredThemeMode, setStoredThemeMode } from "@/shared/theme/theme-storage";
+import {
+  getStoredThemeMode,
+  setStoredThemeMode,
+} from "@/shared/theme/theme-storage";
 import type { ThemeMode } from "@/shared/theme/types";
 import {
   useCallback,

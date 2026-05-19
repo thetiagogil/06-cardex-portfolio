@@ -1,8 +1,17 @@
 import { MetaPill } from "@/features/portfolio/components/MetaPill";
 import { TechBadge } from "@/features/portfolio/components/TechBadge";
-import { getItemOrg, getItemTitle } from "@/features/portfolio/lib/portfolio-display";
-import { formatProjectOriginDate, getYearDateParts } from "@/features/portfolio/lib/portfolio-dates";
-import { getItemHref, isProjectItem } from "@/features/portfolio/lib/portfolio-routing";
+import {
+  getItemOrg,
+  getItemTitle,
+} from "@/features/portfolio/lib/portfolio-display";
+import {
+  formatProjectOriginDate,
+  getYearDateParts,
+} from "@/features/portfolio/lib/portfolio-dates";
+import {
+  getItemHref,
+  isProjectItem,
+} from "@/features/portfolio/lib/portfolio-routing";
 import { shouldShowProjectStatus } from "@/features/portfolio/lib/portfolio-display";
 import { useI18n } from "@/shared/i18n/useI18n";
 import type { DataItem } from "@/features/portfolio/types";
@@ -36,12 +45,12 @@ export const FeaturedPortfolioItem = ({ item }: { item: DataItem }) => {
 
   const inner = (
     <div className="flex gap-3 md:gap-4">
-      <div className="w-12 shrink-0 text-right md:w-20 mt-1">
-        <div className="font-mono text-[10px] leading-tight text-foreground md:text-[11px]">
+      <div className="mt-1 w-12 shrink-0 text-right md:w-20">
+        <div className="text-foreground font-mono text-[10px] leading-tight md:text-[11px]">
           {projectDate ?? date?.primary}
         </div>
         {date?.secondary && (
-          <div className="mt-1 font-mono text-[9px] leading-tight text-muted-foreground md:text-[10px]">
+          <div className="text-muted-foreground mt-1 font-mono text-[9px] leading-tight md:text-[10px]">
             {date.secondary}
           </div>
         )}
@@ -58,11 +67,11 @@ export const FeaturedPortfolioItem = ({ item }: { item: DataItem }) => {
         )}
 
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-          <h3 className="font-display text-base text-balance transition-colors duration-300 group-hover:text-primary md:text-xl">
+          <h3 className="font-display group-hover:text-primary text-base text-balance transition-colors duration-300 md:text-xl">
             {getItemTitle(item, tr)}
             {LinkIndicator && (
               <LinkIndicator
-                className="ml-2 inline-block h-3.5 w-3.5 text-muted-foreground transition-colors duration-300 group-hover:text-primary"
+                className="text-muted-foreground group-hover:text-primary ml-2 inline-block h-3.5 w-3.5 transition-colors duration-300"
                 strokeWidth={1.8}
               />
             )}
@@ -74,13 +83,13 @@ export const FeaturedPortfolioItem = ({ item }: { item: DataItem }) => {
         </div>
 
         {org && (
-          <span className="text-xs italic text-muted-foreground md:text-sm">
+          <span className="text-muted-foreground text-xs italic md:text-sm">
             {org}
           </span>
         )}
 
         {item.descriptionKey && (
-          <p className="mt-2 text-xs leading-relaxed text-muted-foreground text-pretty md:text-sm">
+          <p className="text-muted-foreground mt-2 text-xs leading-relaxed text-pretty md:text-sm">
             {tr(item.descriptionKey)}
           </p>
         )}

@@ -29,7 +29,7 @@ export const HomePage = () => {
           <div className="pt-4 text-center">
             <RouterLink
               to="/timeline"
-              className="inline-flex items-center gap-2 font-display text-base italic text-muted-foreground transition-colors duration-300 hover:text-primary md:text-lg"
+              className="font-display text-muted-foreground hover:text-primary inline-flex items-center gap-2 text-base italic transition-colors duration-300 md:text-lg"
             >
               {t("home.viewTimeline")}
               <ArrowRight className="h-4 w-4" strokeWidth={1.8} />

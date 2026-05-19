@@ -13,7 +13,7 @@ export const PortfolioDetailStack = ({
 
   return (
     <section className={className}>
-      <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground md:text-[11px]">
+      <p className="text-muted-foreground font-mono text-[10px] tracking-[0.22em] uppercase md:text-[11px]">
         {label}
       </p>
       <div className="mt-4 flex flex-wrap gap-2">

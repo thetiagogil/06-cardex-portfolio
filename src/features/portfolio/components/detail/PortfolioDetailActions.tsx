@@ -26,10 +26,10 @@ export const PortfolioDetailActions = ({
             target="_blank"
             rel="noreferrer"
             className={cn(
-              "inline-flex items-center gap-2 px-5 py-3 font-mono text-xs uppercase tracking-[0.18em] transition-colors duration-300",
+              "inline-flex items-center gap-2 px-5 py-3 font-mono text-xs tracking-[0.18em] uppercase transition-colors duration-300",
               entry.variant === "primary"
                 ? "bg-foreground text-background hover:bg-primary"
-                : "border border-foreground hover:bg-foreground hover:text-background",
+                : "border-foreground hover:bg-foreground hover:text-background border",
             )}
           >
             <span>{entry.label}</span>

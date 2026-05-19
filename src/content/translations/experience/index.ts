@@ -10,4 +10,3 @@ export const experienceTranslations: TranslationDictionary = {
   ...talentProtocolTranslations,
   ...aquasisTranslations,
 };
-

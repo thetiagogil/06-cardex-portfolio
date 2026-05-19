@@ -12,7 +12,7 @@ import { Route, Routes } from "react-router-dom";
 
 export const AppRouter = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <SiteHeader />
       <main className="flex-1">
         <ScrollToTop />

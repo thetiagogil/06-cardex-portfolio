@@ -1,11 +1,20 @@
-import { PortfolioDetailActions, type PortfolioActionLink } from "@/features/portfolio/components/detail/PortfolioDetailActions";
+import {
+  PortfolioDetailActions,
+  type PortfolioActionLink,
+} from "@/features/portfolio/components/detail/PortfolioDetailActions";
 import { PortfolioDetailHeader } from "@/features/portfolio/components/detail/PortfolioDetailHeader";
 import { PortfolioDetailMedia } from "@/features/portfolio/components/detail/PortfolioDetailMedia";
 import { PortfolioDetailStack } from "@/features/portfolio/components/detail/PortfolioDetailStack";
 import { PortfolioRichContent } from "@/features/portfolio/components/detail/PortfolioRichContent";
 import { getDetailItemByCategoryAndSlug } from "@/features/portfolio/lib/portfolio-queries";
-import { getItemOrg, getItemTitle } from "@/features/portfolio/lib/portfolio-display";
-import { formatMonthYearRange, formatProjectOriginDate } from "@/features/portfolio/lib/portfolio-dates";
+import {
+  getItemOrg,
+  getItemTitle,
+} from "@/features/portfolio/lib/portfolio-display";
+import {
+  formatMonthYearRange,
+  formatProjectOriginDate,
+} from "@/features/portfolio/lib/portfolio-dates";
 import { getProjectImages } from "@/features/portfolio/lib/portfolio-images";
 import { isProjectItem } from "@/features/portfolio/lib/portfolio-routing";
 import type { Category } from "@/features/portfolio/types";
@@ -79,7 +88,9 @@ export const PortfolioDetailPage = ({ category }: { category: Category }) => {
           (!item.link && !projectRepo && index === 0 ? "primary" : "secondary"),
       })),
   ];
-  const hasPotentialMedia = isProject ? projectImages.length > 0 : Boolean(item.img);
+  const hasPotentialMedia = isProject
+    ? projectImages.length > 0
+    : Boolean(item.img);
   const hasContentSections =
     hasPotentialMedia ||
     item.techs.length > 0 ||
@@ -102,7 +113,7 @@ export const PortfolioDetailPage = ({ category }: { category: Category }) => {
       <button
         type="button"
         onClick={handleBack}
-        className="inline-flex cursor-pointer items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground transition-colors duration-300 hover:text-foreground"
+        className="text-muted-foreground hover:text-foreground inline-flex cursor-pointer items-center gap-2 font-mono text-[10px] tracking-[0.2em] uppercase transition-colors duration-300"
       >
         <ArrowLeft className="h-3.5 w-3.5" />
         <span>{t("detail.back")}</span>
@@ -138,7 +149,7 @@ export const PortfolioDetailPage = ({ category }: { category: Category }) => {
               {details ? (
                 <PortfolioRichContent value={details} />
               ) : item.descriptionKey ? (
-                <p className="text-sm leading-relaxed text-muted-foreground text-pretty md:text-lg">
+                <p className="text-muted-foreground text-sm leading-relaxed text-pretty md:text-lg">
                   {tr(item.descriptionKey)}
                 </p>
               ) : null}

@@ -35,12 +35,12 @@ export const PortfolioDetailMedia = ({
 
   return (
     <>
-      <figure className="overflow-hidden rounded-sm border border-border bg-muted/40">
+      <figure className="border-border bg-muted/40 overflow-hidden rounded-sm border">
         <button
           type="button"
           aria-label="Open image viewer"
           onClick={() => setImageLightboxOpen(true)}
-          className="group relative block w-full cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="group focus-visible:ring-ring relative block w-full cursor-zoom-in focus-visible:ring-2 focus-visible:outline-none"
         >
           <LoadableImage
             key={item.img}
@@ -50,7 +50,7 @@ export const PortfolioDetailMedia = ({
             loading="eager"
             onError={() => setFailedImageSrc(item.img ?? null)}
           />
-          <span className="absolute top-3 left-3 flex h-8 w-8 items-center justify-center rounded-full bg-background/85 text-foreground opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+          <span className="bg-background/85 text-foreground absolute top-3 left-3 flex h-8 w-8 items-center justify-center rounded-full opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
             <Maximize2 className="h-4 w-4" strokeWidth={1.8} />
           </span>
         </button>
