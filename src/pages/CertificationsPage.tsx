@@ -1,5 +1,5 @@
-import { PortfolioDetailPage } from "@/features/portfolio/components/detail/PortfolioDetailPage";
+import { PortfolioDetailView } from "@/features/portfolio/components/detail/PortfolioDetailView";
 
 export const CertificationsPage = () => (
-  <PortfolioDetailPage category="certifications" />
+  <PortfolioDetailView category="certifications" />
 );

@@ -1,11 +1,6 @@
 import { cn } from "@/shared/lib/cn";
+import type { PortfolioActionLink } from "@/features/portfolio/lib/portfolio-detail-links";
 import { ExternalLink } from "lucide-react";
-
-export interface PortfolioActionLink {
-  href: string;
-  label: string;
-  variant: "primary" | "secondary";
-}
 
 export const PortfolioDetailActions = ({
   className,

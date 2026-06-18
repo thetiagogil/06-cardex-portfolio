@@ -1,3 +1,3 @@
-import { PortfolioDetailPage } from "@/features/portfolio/components/detail/PortfolioDetailPage";
+import { PortfolioDetailView } from "@/features/portfolio/components/detail/PortfolioDetailView";
 
-export const EducationPage = () => <PortfolioDetailPage category="education" />;
+export const EducationPage = () => <PortfolioDetailView category="education" />;

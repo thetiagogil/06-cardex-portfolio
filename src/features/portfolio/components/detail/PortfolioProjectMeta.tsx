@@ -1,11 +1,11 @@
 import { MetaPill } from "@/features/portfolio/components/MetaPill";
+import { PortfolioProjectMetaItem } from "@/features/portfolio/components/detail/PortfolioProjectMetaItem";
 import type {
   ItemStatus,
   ProjectScope,
   ProjectType,
 } from "@/features/portfolio/types";
 import { cn } from "@/shared/lib/cn";
-import type { ReactNode } from "react";
 
 interface ProjectMetaLabels {
   category: string;
@@ -13,21 +13,6 @@ interface ProjectMetaLabels {
   scope: string;
   status: string;
 }
-
-const ProjectMetaItem = ({
-  children,
-  label,
-}: {
-  children: ReactNode;
-  label: string;
-}) => (
-  <div>
-    <dt className="text-muted-foreground font-mono text-[10px] tracking-[0.2em] uppercase">
-      {label}
-    </dt>
-    <dd className="mt-2 text-sm leading-relaxed">{children}</dd>
-  </div>
-);
 
 export const PortfolioProjectMeta = ({
   className,
@@ -46,24 +31,24 @@ export const PortfolioProjectMeta = ({
 }) => (
   <section className={cn("border-border/60 border-y py-4", className)}>
     <dl className="grid gap-x-7 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
-      <ProjectMetaItem label={labels.dates}>
+      <PortfolioProjectMetaItem label={labels.dates}>
         <span className="text-muted-foreground font-mono text-[11px]">
           {dateLabel}
         </span>
-      </ProjectMetaItem>
+      </PortfolioProjectMetaItem>
 
-      <ProjectMetaItem label={labels.category}>
+      <PortfolioProjectMetaItem label={labels.category}>
         <MetaPill kind="project" value={projectType} />
-      </ProjectMetaItem>
+      </PortfolioProjectMetaItem>
 
-      <ProjectMetaItem label={labels.scope}>
+      <PortfolioProjectMetaItem label={labels.scope}>
         <MetaPill kind="scope" value={scope} />
-      </ProjectMetaItem>
+      </PortfolioProjectMetaItem>
 
       {status && (
-        <ProjectMetaItem label={labels.status}>
+        <PortfolioProjectMetaItem label={labels.status}>
           <MetaPill kind="status" value={status} />
-        </ProjectMetaItem>
+        </PortfolioProjectMetaItem>
       )}
     </dl>
   </section>
