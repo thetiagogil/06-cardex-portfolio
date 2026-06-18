@@ -5,26 +5,32 @@ import {
 import { PortfolioDetailHeader } from "@/features/portfolio/components/detail/PortfolioDetailHeader";
 import { PortfolioDetailMedia } from "@/features/portfolio/components/detail/PortfolioDetailMedia";
 import { PortfolioDetailStack } from "@/features/portfolio/components/detail/PortfolioDetailStack";
+import { PortfolioProjectMeta } from "@/features/portfolio/components/detail/PortfolioProjectMeta";
 import { PortfolioRichContent } from "@/features/portfolio/components/detail/PortfolioRichContent";
-import { getDetailItemByCategoryAndSlug } from "@/features/portfolio/lib/portfolio-queries";
-import {
-  getItemOrg,
-  getItemTitle,
-} from "@/features/portfolio/lib/portfolio-display";
+import { PortfolioShowcaseLinks } from "@/features/portfolio/components/detail/PortfolioShowcaseLinks";
 import {
   formatMonthYearRange,
   formatProjectOriginDate,
 } from "@/features/portfolio/lib/portfolio-dates";
+import {
+  getItemOrg,
+  getItemTitle,
+} from "@/features/portfolio/lib/portfolio-display";
 import { getProjectImages } from "@/features/portfolio/lib/portfolio-images";
+import { getDetailItemByCategoryAndSlug } from "@/features/portfolio/lib/portfolio-queries";
 import { isProjectItem } from "@/features/portfolio/lib/portfolio-routing";
 import type { Category } from "@/features/portfolio/types";
-import { cn } from "@/shared/lib/cn";
 import { useI18n } from "@/shared/i18n/useI18n";
+import { cn } from "@/shared/lib/cn";
 import { ArrowLeft } from "lucide-react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 const articleContentClassName = "mt-8 space-y-8 md:mt-10 md:space-y-10";
-const articleSectionClassName = "border-t border-border/60 pt-10";
+const articleSectionClassName = "border-t border-border/60 pt-8";
+const articleInfoClassName = "max-w-230";
+const projectContentClassName = "mt-6 space-y-4 md:mt-7 md:space-y-5";
+const projectMediaClassName = "mt-5 md:mt-6";
+const projectIntroClassName = "mt-5";
 
 const defaultLinkLabelKey: Record<Category, string> = {
   experience: "experience.visit",
@@ -56,8 +62,11 @@ export const PortfolioDetailPage = ({ category }: { category: Category }) => {
         lang,
         presentLabel: t("timeline.present"),
       });
-  const details = tv(item.detailsKey);
-  const hasDetailsContent = Boolean(item.descriptionKey || details);
+  const details = tv(item.detailKey);
+  const showcaseItems = item.showcaseItems ?? [];
+  const hasDetailsContent = Boolean(item.summaryKey || details);
+  const hasDetailSections =
+    typeof details === "object" && Boolean(details.sections?.length);
   const projectRepo = isProject ? item.repo : undefined;
   const actionLinks: PortfolioActionLink[] = [
     ...(item.link
@@ -91,11 +100,13 @@ export const PortfolioDetailPage = ({ category }: { category: Category }) => {
   const hasPotentialMedia = isProject
     ? projectImages.length > 0
     : Boolean(item.img);
-  const hasContentSections =
-    hasPotentialMedia ||
-    item.techs.length > 0 ||
-    hasDetailsContent ||
-    actionLinks.length > 0;
+  const hasInfoMeta = item.techs.length > 0 || actionLinks.length > 0;
+  const hasNonProjectLowerContent =
+    !isProject &&
+    (hasDetailSections ||
+      showcaseItems.length > 0 ||
+      hasInfoMeta ||
+      hasPotentialMedia);
 
   const handleBack = () => {
     const historyState = window.history.state as { idx?: number } | null;
@@ -109,7 +120,7 @@ export const PortfolioDetailPage = ({ category }: { category: Category }) => {
   };
 
   return (
-    <article className="mx-auto max-w-215 px-6 py-10 md:px-12 md:py-14">
+    <article className="mx-auto max-w-320 px-6 py-10 md:px-12 md:py-14">
       <button
         type="button"
         onClick={handleBack}
@@ -119,47 +130,148 @@ export const PortfolioDetailPage = ({ category }: { category: Category }) => {
         <span>{t("detail.back")}</span>
       </button>
 
-      <PortfolioDetailHeader
-        dateLabel={dateLabel}
-        isProject={isProject}
-        org={org}
-        projectType={isProject ? item.type : undefined}
-        status={item.status}
-        subject={item.subjectKey ? tr(item.subjectKey) : undefined}
-        title={title}
-      />
+      {isProject ? (
+        <>
+          <div className={articleInfoClassName}>
+            <PortfolioDetailHeader
+              dateLabel={dateLabel}
+              isProject={isProject}
+              org={org}
+              projectType={item.type}
+              showMeta={false}
+              status={item.status}
+              subject={item.subjectKey ? tr(item.subjectKey) : undefined}
+              title={title}
+            />
 
-      {hasContentSections && (
-        <div className={articleContentClassName}>
+            {hasDetailsContent && (
+              <section className={projectIntroClassName}>
+                {details ? (
+                  <PortfolioRichContent value={details} presentation="intro" />
+                ) : item.summaryKey ? (
+                  <p className="text-muted-foreground text-sm leading-relaxed text-pretty md:text-base">
+                    {tr(item.summaryKey)}
+                  </p>
+                ) : null}
+              </section>
+            )}
+          </div>
+
+          {showcaseItems.length > 0 && (
+            <PortfolioShowcaseLinks
+              className="mt-5 md:mt-6"
+              items={showcaseItems}
+            />
+          )}
+
+          <div className={projectContentClassName}>
+            <PortfolioProjectMeta
+              dateLabel={dateLabel}
+              labels={{
+                category: t("project.category"),
+                dates: t("project.dates"),
+                scope: t("project.scope"),
+                status: t("project.status"),
+              }}
+              projectType={item.type}
+              scope={item.scope}
+              status={item.status}
+            />
+
+            {hasInfoMeta && (
+              <div className="grid gap-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+                <PortfolioDetailStack
+                  className="min-w-0"
+                  label={t("project.stack")}
+                  techs={item.techs}
+                />
+
+                <PortfolioDetailActions links={actionLinks} />
+              </div>
+            )}
+          </div>
+        </>
+      ) : (
+        <div className={articleInfoClassName}>
+          <PortfolioDetailHeader
+            dateLabel={dateLabel}
+            isProject={isProject}
+            org={org}
+            projectType={undefined}
+            status={item.status}
+            subject={item.subjectKey ? tr(item.subjectKey) : undefined}
+            title={title}
+          />
+
+          {hasDetailsContent && (
+            <section className={projectIntroClassName}>
+              {details ? (
+                <PortfolioRichContent value={details} presentation="intro" />
+              ) : item.summaryKey ? (
+                <p className="text-muted-foreground text-sm leading-relaxed text-pretty md:text-base">
+                  {tr(item.summaryKey)}
+                </p>
+              ) : null}
+            </section>
+          )}
+        </div>
+      )}
+
+      {isProject && hasPotentialMedia && (
+        <div className={projectMediaClassName}>
           <PortfolioDetailMedia
             item={item}
             org={org}
             projectImages={projectImages}
             title={title}
           />
+        </div>
+      )}
 
-          <PortfolioDetailStack
-            className={articleSectionClassName}
-            label={t("project.stack")}
-            techs={item.techs}
-          />
+      {hasNonProjectLowerContent && (
+        <div className={cn(articleContentClassName, articleInfoClassName)}>
+          {(hasDetailSections || showcaseItems.length > 0 || hasInfoMeta) && (
+            <div className="space-y-8">
+              {hasDetailSections && details && (
+                <PortfolioRichContent value={details} presentation="sections" />
+              )}
 
-          {hasDetailsContent && (
-            <section className={cn(articleSectionClassName, "space-y-6")}>
-              {details ? (
-                <PortfolioRichContent value={details} />
-              ) : item.descriptionKey ? (
-                <p className="text-muted-foreground text-sm leading-relaxed text-pretty md:text-lg">
-                  {tr(item.descriptionKey)}
-                </p>
-              ) : null}
-            </section>
+              {showcaseItems.length > 0 && (
+                <section className={articleSectionClassName}>
+                  <PortfolioShowcaseLinks
+                    items={showcaseItems}
+                    title={t("detail.projects")}
+                  />
+                </section>
+              )}
+
+              {hasInfoMeta && (
+                <div
+                  className={cn(
+                    articleSectionClassName,
+                    "grid gap-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-end",
+                  )}
+                >
+                  <PortfolioDetailStack
+                    className="min-w-0"
+                    label={t("project.stack")}
+                    techs={item.techs}
+                  />
+
+                  <PortfolioDetailActions links={actionLinks} />
+                </div>
+              )}
+            </div>
           )}
 
-          <PortfolioDetailActions
-            className={articleSectionClassName}
-            links={actionLinks}
-          />
+          {hasPotentialMedia && (
+            <PortfolioDetailMedia
+              item={item}
+              org={org}
+              projectImages={projectImages}
+              title={title}
+            />
+          )}
         </div>
       )}
     </article>

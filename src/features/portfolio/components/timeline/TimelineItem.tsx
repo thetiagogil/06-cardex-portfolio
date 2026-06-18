@@ -116,9 +116,9 @@ export const TimelineItem = ({ item }: { item: DataItem }) => {
           </p>
         )}
 
-        {item.descriptionKey && (
+        {item.summaryKey && (
           <p className="text-muted-foreground mt-3 max-w-2xl text-xs leading-relaxed text-pretty md:text-base">
-            {tr(item.descriptionKey)}
+            {tr(item.summaryKey)}
           </p>
         )}
 

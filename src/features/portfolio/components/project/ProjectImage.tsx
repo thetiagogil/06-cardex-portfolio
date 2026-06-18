@@ -1,16 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
+import { sortProjectImages } from "@/features/portfolio/lib/portfolio-images";
 import { ImageLightbox } from "@/shared/components/media/ImageLightbox";
 import { LoadableImage } from "@/shared/components/media/LoadableImage";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  type CarouselApi,
-} from "@/shared/components/ui/Carousel";
-import { sortProjectImages } from "@/features/portfolio/lib/portfolio-images";
 import { Maximize2 } from "lucide-react";
 
 export const ProjectImage = ({
@@ -21,42 +13,11 @@ export const ProjectImage = ({
   alt: string;
 }) => {
   const [failedImages, setFailedImages] = useState<string[]>([]);
-  const [api, setApi] = useState<CarouselApi>();
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxInitialIndex, setLightboxInitialIndex] = useState(0);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const resolvedImages = sortProjectImages(images);
-  const visibleImages = resolvedImages.filter(
+  const visibleImages = sortProjectImages(images).filter(
     (image) => !failedImages.includes(image),
   );
-
-  useEffect(() => {
-    if (!api) {
-      return;
-    }
-
-    const syncPosition = () => {
-      const nextIndex = Math.min(
-        api.selectedScrollSnap(),
-        Math.max(visibleImages.length - 1, 0),
-      );
-
-      if (api.selectedScrollSnap() !== nextIndex) {
-        api.scrollTo(nextIndex);
-      }
-
-      setSelectedIndex(nextIndex);
-    };
-
-    syncPosition();
-    api.on("reInit", syncPosition);
-    api.on("select", syncPosition);
-
-    return () => {
-      api.off("reInit", syncPosition);
-      api.off("select", syncPosition);
-    };
-  }, [api, visibleImages.length]);
 
   const handleImageError = (image: string) => {
     setFailedImages((current) =>
@@ -69,83 +30,44 @@ export const ProjectImage = ({
     setLightboxOpen(true);
   };
 
-  if (!visibleImages.length) return null;
-
-  if (visibleImages.length === 1) {
-    const [image] = visibleImages;
-
-    return (
-      <>
-        <figure className="border-border bg-muted/40 overflow-hidden rounded-sm border">
-          <button
-            type="button"
-            aria-label="Open image viewer"
-            onClick={() => openLightbox(0)}
-            className="group focus-visible:ring-ring relative block w-full cursor-zoom-in focus-visible:ring-2 focus-visible:outline-none"
-          >
-            <LoadableImage
-              key={image}
-              src={`/${image}`}
-              alt={alt}
-              className="aspect-video w-full object-cover object-top"
-              loading="eager"
-              onError={() => handleImageError(image)}
-            />
-            <span className="bg-background/85 text-foreground absolute top-3 left-3 flex h-8 w-8 items-center justify-center rounded-full opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
-              <Maximize2 className="h-4 w-4" strokeWidth={1.8} />
-            </span>
-          </button>
-        </figure>
-
-        <ImageLightbox
-          alt={alt}
-          images={visibleImages}
-          initialIndex={lightboxInitialIndex}
-          open={lightboxOpen}
-          onImageError={handleImageError}
-          onOpenChange={setLightboxOpen}
-        />
-      </>
-    );
-  }
+  if (visibleImages.length === 0) return null;
 
   return (
     <>
-      <figure className="border-border bg-muted/40 overflow-hidden rounded-sm border">
-        <Carousel setApi={setApi} className="w-full">
-          <div className="bg-background/85 text-foreground absolute top-3 right-3 z-10 rounded-full px-2.5 py-1 font-mono text-[10px] tracking-[0.18em] uppercase backdrop-blur-sm">
-            {selectedIndex + 1} / {visibleImages.length}
-          </div>
+      <div className="space-y-8 md:space-y-12">
+        {visibleImages.map((image, index) => {
+          const imageNumber = index + 1;
 
-          <CarouselContent className="ml-0">
-            {visibleImages.map((image, index) => (
-              <CarouselItem key={image} className="pl-0">
-                <button
-                  type="button"
-                  aria-label={`Open image ${index + 1} of ${visibleImages.length}`}
-                  onClick={() => openLightbox(index)}
-                  className="group focus-visible:ring-ring relative block w-full cursor-zoom-in focus-visible:ring-2 focus-visible:outline-none"
-                >
-                  <LoadableImage
-                    key={image}
-                    src={`/${image}`}
-                    alt={`${alt} ${index + 1} of ${visibleImages.length}`}
-                    className="aspect-video w-full object-cover object-top"
-                    loading={index === 0 ? "eager" : "lazy"}
-                    onError={() => handleImageError(image)}
-                  />
-                  <span className="bg-background/85 text-foreground absolute top-3 left-3 flex h-8 w-8 items-center justify-center rounded-full opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
-                    <Maximize2 className="h-4 w-4" strokeWidth={1.8} />
-                  </span>
-                </button>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-
-          <CarouselPrevious className="bg-background/85 hover:bg-background top-auto bottom-3 left-3 translate-y-0 backdrop-blur-sm" />
-          <CarouselNext className="bg-background/85 hover:bg-background top-auto right-3 bottom-3 translate-y-0 backdrop-blur-sm" />
-        </Carousel>
-      </figure>
+          return (
+            <figure
+              key={image}
+              className="border-border bg-muted/40 overflow-hidden rounded-sm border"
+            >
+              <button
+                type="button"
+                aria-label={`Open image ${imageNumber} of ${visibleImages.length}`}
+                onClick={() => openLightbox(index)}
+                className="group focus-visible:ring-ring relative block w-full cursor-zoom-in focus-visible:ring-2 focus-visible:outline-none"
+              >
+                <LoadableImage
+                  src={`/${image}`}
+                  alt={
+                    index === 0
+                      ? alt
+                      : `${alt} ${imageNumber} of ${visibleImages.length}`
+                  }
+                  className="aspect-[16/10] w-full object-cover object-top md:aspect-video"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  onError={() => handleImageError(image)}
+                />
+                <span className="bg-background/85 text-foreground absolute top-3 left-3 flex h-8 w-8 items-center justify-center rounded-full opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                  <Maximize2 className="h-4 w-4" strokeWidth={1.8} />
+                </span>
+              </button>
+            </figure>
+          );
+        })}
+      </div>
 
       <ImageLightbox
         alt={alt}

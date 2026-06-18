@@ -6,6 +6,7 @@ export const PortfolioDetailHeader = ({
   isProject,
   org,
   projectType,
+  showMeta = true,
   status,
   subject,
   title,
@@ -14,6 +15,7 @@ export const PortfolioDetailHeader = ({
   isProject: boolean;
   org?: string;
   projectType?: ProjectType;
+  showMeta?: boolean;
   status?: ItemStatus;
   subject?: string;
   title: string;
@@ -31,20 +33,22 @@ export const PortfolioDetailHeader = ({
       </h1>
 
       {subject && (
-        <p className="text-muted-foreground max-w-3xl text-sm leading-relaxed text-pretty md:text-lg">
+        <p className="text-muted-foreground max-w-3xl text-sm leading-relaxed text-pretty md:text-base">
           {subject}
         </p>
       )}
 
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-        <span className="text-muted-foreground font-mono text-[10px] md:text-[11px]">
-          {dateLabel}
-        </span>
-        {isProject && projectType && (
-          <MetaPill kind="project" value={projectType} />
-        )}
-        {status && <MetaPill kind="status" value={status} />}
-      </div>
+      {showMeta && (
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <span className="text-muted-foreground font-mono text-[10px] md:text-[11px]">
+            {dateLabel}
+          </span>
+          {isProject && projectType && (
+            <MetaPill kind="project" value={projectType} />
+          )}
+          {status && <MetaPill kind="status" value={status} />}
+        </div>
+      )}
     </div>
   </header>
 );

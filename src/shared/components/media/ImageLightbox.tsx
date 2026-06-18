@@ -194,8 +194,8 @@ export const ImageLightbox = ({
                 ))}
               </CarouselContent>
 
-              <CarouselPrevious className="bg-background/85 hover:bg-background top-1/2 left-2 h-10 w-10 -translate-y-1/2 backdrop-blur-sm md:left-4" />
-              <CarouselNext className="bg-background/85 hover:bg-background top-1/2 right-2 h-10 w-10 -translate-y-1/2 backdrop-blur-sm md:right-4" />
+              <CarouselPrevious className="border-border bg-background/85 text-foreground hover:border-foreground/40 hover:bg-foreground/10 hover:text-foreground top-1/2 left-2 h-10 w-10 -translate-y-1/2 backdrop-blur-sm md:left-4" />
+              <CarouselNext className="border-border bg-background/85 text-foreground hover:border-foreground/40 hover:bg-foreground/10 hover:text-foreground top-1/2 right-2 h-10 w-10 -translate-y-1/2 backdrop-blur-sm md:right-4" />
             </Carousel>
           )}
         </div>

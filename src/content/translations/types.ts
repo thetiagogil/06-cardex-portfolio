@@ -7,41 +7,45 @@ export interface RichTextPart {
 
 export type RichText = Array<string | RichTextPart>;
 
-export interface ParagraphTranslationValue {
-  type: "paragraphs";
-  paragraphs: RichText[];
+export interface DetailFact {
+  label: string;
+  value: RichText;
 }
 
-export interface RichListItem {
+export interface DetailTimelineItem {
+  label: string;
   text: RichText;
-  children?: RichListItem[];
 }
 
-export interface ListTranslationValue {
-  type: "list";
-  items: RichListItem[];
+export type DetailSectionVariant =
+  | "narrative"
+  | "highlights"
+  | "facts"
+  | "timeline"
+  | "note";
+
+export interface DetailSection {
+  id: string;
+  title: string;
+  eyebrow?: string;
+  variant: DetailSectionVariant;
+  body?: RichText[];
+  items?: RichText[];
+  facts?: DetailFact[];
+  timeline?: DetailTimelineItem[];
 }
 
-export interface TranslationSection {
-  title?: string;
-  content: TranslationBlockValue;
+export interface DetailTranslationValue {
+  type: "detail";
+  lead?: RichText[];
+  sections?: DetailSection[];
 }
 
-export interface SectionsTranslationValue {
-  type: "sections";
-  sections: TranslationSection[];
+export type TranslationValue = string | DetailTranslationValue;
+
+export type LocaleDictionary = Record<string, TranslationValue>;
+
+export interface TranslationDictionary {
+  en: LocaleDictionary;
+  pt: LocaleDictionary;
 }
-
-export type TranslationBlockValue =
-  | string
-  | ParagraphTranslationValue
-  | ListTranslationValue;
-
-export type TranslationValue = TranslationBlockValue | SectionsTranslationValue;
-
-export interface TranslationEntry {
-  en: TranslationValue;
-  pt?: TranslationValue;
-}
-
-export type TranslationDictionary = Record<string, TranslationEntry>;

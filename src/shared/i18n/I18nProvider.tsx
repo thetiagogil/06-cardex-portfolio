@@ -20,8 +20,7 @@ export const I18nProvider = ({ children }: { children: ReactNode }) => {
     (key: string | undefined): TranslationValue | undefined => {
       if (!key) return undefined;
 
-      const entry = dictionary[key];
-      return entry?.[lang] ?? entry?.en;
+      return dictionary[lang][key] ?? dictionary.en[key];
     },
     [lang],
   );

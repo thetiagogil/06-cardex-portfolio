@@ -8,6 +8,9 @@ export type {
   EducationItem,
   ExperienceItem,
   ItemStatus,
+  ProjectDataSource,
   ProjectItem,
+  ProjectScope,
   ProjectType,
+  ShowcaseItem,
 } from "@/content/portfolio/types";

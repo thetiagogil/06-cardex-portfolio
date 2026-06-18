@@ -4,20 +4,56 @@ export type Category =
   | "education"
   | "certifications";
 
-export type ItemStatus = "in progress" | "completed" | "unavailable";
+export type ItemStatus =
+  | "planned"
+  | "in progress"
+  | "completed"
+  | "archived"
+  | "offline";
 
 export type ProjectType =
   | "core"
   | "product"
+  | "early-work"
   | "experiment"
-  | "early work"
   | "design";
+
+export type ProjectScope =
+  | "game"
+  | "game-companion"
+  | "team-planner"
+  | "finance-tool"
+  | "qa-app"
+  | "ecommerce"
+  | "cafe-website"
+  | "portfolio"
+  | "tracker-organizer"
+  | "concert-tracker"
+  | "ranking-tracker"
+  | "life-system";
+
+export type ProjectDataSource =
+  | "none"
+  | "hardcoded"
+  | "local-storage"
+  | "shared-database"
+  | "dedicated-database";
 
 export interface DetailLink {
   href: string;
   label: string;
   labelKey?: string;
   variant?: "primary" | "secondary";
+}
+
+export interface ShowcaseItem {
+  itemId?: string;
+  href?: string;
+  label: string;
+  labelKey?: string;
+  description?: string;
+  descriptionKey?: string;
+  techs?: string[];
 }
 
 export interface BaseDataItem {
@@ -27,10 +63,11 @@ export interface BaseDataItem {
   org?: string;
   orgKey?: string;
   subjectKey?: string;
-  descriptionKey?: string;
-  detailsKey?: string;
+  summaryKey?: string;
+  detailKey?: string;
   link?: string;
   detailLinks?: DetailLink[];
+  showcaseItems?: ShowcaseItem[];
   techs: string[];
   dateStart: Date;
   dateEnd?: Date | null;
@@ -54,6 +91,8 @@ export interface ProjectItem extends Omit<
   repo?: string;
   status: ItemStatus;
   type: ProjectType;
+  scope: ProjectScope;
+  dataSource: ProjectDataSource;
   hasDetailsPage?: boolean;
   images?: string[];
   img?: never;

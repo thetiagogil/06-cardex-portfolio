@@ -88,9 +88,9 @@ export const FeaturedPortfolioItem = ({ item }: { item: DataItem }) => {
           </span>
         )}
 
-        {item.descriptionKey && (
+        {item.summaryKey && (
           <p className="text-muted-foreground mt-2 text-xs leading-relaxed text-pretty md:text-sm">
-            {tr(item.descriptionKey)}
+            {tr(item.summaryKey)}
           </p>
         )}
 
