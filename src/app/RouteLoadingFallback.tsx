@@ -1,15 +1,18 @@
+import { Spinner } from "@radix-ui/themes/components/spinner";
+
 export const RouteLoadingFallback = () => {
   return (
     <main
       aria-live="polite"
-      className="text-foreground grid min-h-[60vh] place-items-center px-6"
+      className="text-foreground place-items-center p-10"
       role="status"
     >
-      <div className="flex flex-col items-center gap-2 text-center">
-        <span className="font-display text-2xl tracking-tight">Cardex</span>
-        <span className="text-muted-foreground font-mono text-[10px] tracking-[0.22em] uppercase">
-          Loading page
-        </span>
+      <div className="items-centertext-center flex flex-col">
+        <Spinner
+          aria-label="Loading page"
+          className="route-loading-spinner"
+          size="2"
+        />
       </div>
     </main>
   );

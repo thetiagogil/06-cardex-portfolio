@@ -1,19 +1,26 @@
-import { Badge } from "@/shared/components/ui/Badge";
+import { TimelineAdvancedFiltersDialog } from "@/features/portfolio/components/timeline/TimelineAdvancedFiltersDialog";
 import {
   timelineFilters,
+  type AdvancedTimelineFilters,
   type TimelineFilter,
+  type TimelineFilterOptions,
 } from "@/features/portfolio/lib/portfolio-filters";
 import { useI18n } from "@/shared/i18n/useI18n";
-import { SlidersHorizontal } from "lucide-react";
 
 export const TimelineFilters = ({
+  advancedFilters,
   value,
   counts,
+  filterOptions,
   onChange,
+  onAdvancedSave,
 }: {
+  advancedFilters: AdvancedTimelineFilters;
   value: TimelineFilter;
   counts: Record<TimelineFilter, number>;
+  filterOptions: TimelineFilterOptions;
   onChange: (filter: TimelineFilter) => void;
+  onAdvancedSave: (filters: AdvancedTimelineFilters) => void;
 }) => {
   const { t } = useI18n();
 
@@ -38,21 +45,11 @@ export const TimelineFilters = ({
         ))}
       </div>
 
-      <button
-        type="button"
-        disabled
-        title={t("timeline.advancedFilters")}
-        className="border-border text-muted-foreground inline-flex w-full items-center justify-between gap-2 self-start rounded-full border border-dashed px-3 py-1.5 font-mono text-[10px] tracking-[0.15em] uppercase opacity-80 md:w-auto md:justify-start"
-      >
-        <SlidersHorizontal className="size-3.5" strokeWidth={1.8} />
-        <span>{t("timeline.advancedFilters")}</span>
-        <Badge
-          variant="outline"
-          className="border-border bg-background text-muted-foreground rounded-full px-2 py-0 font-mono text-[9px] tracking-[0.15em] uppercase"
-        >
-          {t("common.soon")}
-        </Badge>
-      </button>
+      <TimelineAdvancedFiltersDialog
+        filters={advancedFilters}
+        options={filterOptions}
+        onSave={onAdvancedSave}
+      />
     </div>
   );
 };

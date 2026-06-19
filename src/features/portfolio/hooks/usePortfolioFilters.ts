@@ -5,35 +5,61 @@ import {
   getSorted,
 } from "@/features/portfolio/lib/portfolio-queries";
 import { isVisibleItem } from "@/features/portfolio/lib/portfolio-visibility";
-import type { TimelineFilter } from "@/features/portfolio/lib/portfolio-filters";
+import {
+  getTimelineFilterOptions,
+  itemMatchesAdvancedTimelineFilters,
+  type AdvancedTimelineFilters,
+  type TimelineFilter,
+} from "@/features/portfolio/lib/portfolio-filters";
+import { useI18n } from "@/shared/i18n/useI18n";
 
-export const usePortfolioFilters = (filter: TimelineFilter) => {
+export const usePortfolioFilters = (
+  filter: TimelineFilter,
+  advancedFilters: AdvancedTimelineFilters,
+) => {
+  const { tr } = useI18n();
   const visibleItems = useMemo(() => allItems.filter(isVisibleItem), []);
+
+  const advancedFilteredItems = useMemo(
+    () =>
+      visibleItems.filter((item) =>
+        itemMatchesAdvancedTimelineFilters(item, advancedFilters, tr),
+      ),
+    [advancedFilters, tr, visibleItems],
+  );
 
   const sortedItems = useMemo(() => {
     const items =
       filter === "all"
-        ? visibleItems
-        : visibleItems.filter((item) => item.category === filter);
+        ? advancedFilteredItems
+        : advancedFilteredItems.filter((item) => item.category === filter);
 
     return getSorted(items);
-  }, [filter, visibleItems]);
+  }, [advancedFilteredItems, filter]);
 
   const counts = useMemo(
     () => ({
-      all: visibleItems.length,
-      experience: visibleItems.filter((item) => item.category === "experience")
-        .length,
-      projects: visibleItems.filter((item) => item.category === "projects")
-        .length,
-      education: visibleItems.filter((item) => item.category === "education")
-        .length,
-      certifications: visibleItems.filter(
+      all: advancedFilteredItems.length,
+      experience: advancedFilteredItems.filter(
+        (item) => item.category === "experience",
+      ).length,
+      projects: advancedFilteredItems.filter(
+        (item) => item.category === "projects",
+      ).length,
+      education: advancedFilteredItems.filter(
+        (item) => item.category === "education",
+      ).length,
+      certifications: advancedFilteredItems.filter(
         (item) => item.category === "certifications",
       ).length,
     }),
+    [advancedFilteredItems],
+  );
+
+  const filterOptions = useMemo(
+    () => getTimelineFilterOptions(visibleItems),
     [visibleItems],
   );
 
-  return { counts, sortedItems };
+  return { counts, filterOptions, sortedItems };
 };
